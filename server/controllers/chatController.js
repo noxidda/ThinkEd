@@ -1,10 +1,10 @@
-const { GoogleGenerativeAI } = require('@google-genai/google-genai');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 const Note = require('../models/Note');
 
 const getGeminiClient = () => {
   const apiKey = process.env.GOOGLE_AI_STUDIO_API_KEY;
   if (!apiKey || apiKey.includes('your-google-ai-key')) return null;
-  return new GoogleGenerativeAI({ apiKey });
+  return new GoogleGenerativeAI(apiKey);
 };
 
 exports.queryRAG = async (req, res) => {
@@ -34,12 +34,10 @@ exports.queryRAG = async (req, res) => {
 
     if (ai) {
       try {
+        const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash' });
         const prompt = `You are ThinkEd AI RAG assistant. Answer the user's question using ONLY the provided document context. If the answer is not in the text, summarize what is available and provide helpful study context.\n\nContext:\n${combinedContext}\n\nQuestion: ${question}`;
-        const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: prompt,
-        });
-        answer = response.text;
+        const result = await model.generateContent(prompt);
+        answer = result.response.text();
       } catch (err) {
         console.error('Gemini RAG query failed:', err.message);
       }

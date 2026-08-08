@@ -1,4 +1,4 @@
-const { GoogleGenerativeAI } = require('@google-genai/google-genai');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 const pdfParse = require('pdf-parse');
 const axios = require('axios');
 const Note = require('../models/Note');
@@ -7,7 +7,7 @@ const Note = require('../models/Note');
 const getGeminiClient = () => {
   const apiKey = process.env.GOOGLE_AI_STUDIO_API_KEY;
   if (!apiKey || apiKey.includes('your-google-ai-key')) return null;
-  return new GoogleGenerativeAI({ apiKey });
+  return new GoogleGenerativeAI(apiKey);
 };
 
 exports.getNotes = async (req, res) => {
@@ -40,7 +40,6 @@ exports.uploadNote = async (req, res) => {
     const cloudinaryId = file.filename || file.public_id || 'cloudinary_storage';
     let extractedText = '';
 
-    // Extract real text if PDF file
     if (file.mimetype.includes('pdf') && file.buffer) {
       try {
         const parsed = await pdfParse(file.buffer);
@@ -95,12 +94,10 @@ exports.summarizeNote = async (req, res) => {
 
     if (ai && note.extractedText) {
       try {
+        const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash' });
         const prompt = `Provide a clear, concise ${length} summary of the following study material titled "${note.title}":\n\n${note.extractedText.slice(0, 8000)}`;
-        const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: prompt,
-        });
-        summaryText = response.text;
+        const result = await model.generateContent(prompt);
+        summaryText = result.response.text();
       } catch (err) {
         console.error('Gemini API call failed:', err.message);
       }
