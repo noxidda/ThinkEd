@@ -1,7 +1,7 @@
-import { SignIn } from '@clerk/clerk-react';
+import { SignUp } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
 
-export default function Login() {
+export default function Register() {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col justify-between font-sans selection:bg-white selection:text-black">
       {/* Header */}
@@ -12,8 +12,8 @@ export default function Login() {
           </div>
           <span className="font-bold tracking-tight text-base uppercase">ThinkEd</span>
         </Link>
-        <Link to="/register" className="btn-ghost text-xs">
-          Need an account? Sign Up &rarr;
+        <Link to="/login" className="btn-ghost text-xs">
+          Already have an account? Sign In &rarr;
         </Link>
       </header>
 
@@ -22,20 +22,20 @@ export default function Login() {
         <div className="w-full max-w-md card p-8 space-y-6 border border-surface-border bg-surface-card">
           <div className="text-center space-y-2">
             <h1 className="text-heading text-white uppercase font-bold tracking-tight">
-              Sign In to ThinkEd
+              Create your account
             </h1>
             <p className="text-xs text-zinc-400">
-              Access your personalized study console and document intelligence
+              Join ThinkEd to access automated document summaries and active recall
             </p>
           </div>
 
           {/* Custom Styled Clerk Component */}
           <div className="flex justify-center clerk-custom-wrapper">
-            <SignIn
+            <SignUp
               routing="path"
-              path="/sign-in"
-              signUpUrl="/sign-up"
-              afterSignInUrl="/dashboard"
+              path="/sign-up"
+              signInUrl="/sign-in"
+              afterSignUpUrl="/dashboard"
               appearance={{
                 elements: {
                   rootBox: 'w-full',

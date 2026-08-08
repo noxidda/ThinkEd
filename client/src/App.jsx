@@ -4,6 +4,8 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Landing from './pages/Landing';
 
 // Pages
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 import Dashboard from './pages/Dashboard';
 import Notes from './pages/Notes';
 import NoteView from './pages/NoteView';
@@ -28,8 +30,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
-          {/* Public Landing Page */}
+          {/* Public Landing & Auth Routes */}
           <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/sign-in/*" element={<Login />} />
+          <Route path="/sign-up/*" element={<Register />} />
 
           {/* Protected Dashboard Routes */}
           <Route element={<DashboardLayout />}>
