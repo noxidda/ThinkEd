@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -36,39 +36,39 @@
 @layer components {
   /* Minimal card component */
   .card {
-    @apply bg-surface-card border border-surface-border p-6 transition-colors duration-150;
+    @apply bg-surface-card border border-surface-border p-6 transition-colors duration-200;
   }
 
   /* Input component */
   .input {
     @apply w-full bg-black border border-surface-border px-4 py-3 text-white 
            placeholder-zinc-600 focus:outline-none focus:border-white 
-           transition-colors duration-150 font-sans text-sm;
+           transition-colors duration-200 font-sans text-sm;
   }
 
-  /* Button variants - high contrast monochrome */
+  /* Button variants - high contrast monochrome with subtle opacity pulse (no X/Y translation) */
   .btn-primary {
     @apply px-6 py-3 bg-white text-black font-semibold text-sm 
-           hover:bg-zinc-200 transition-colors duration-150 
+           hover:bg-zinc-200 transition-colors duration-200 
            border border-white disabled:opacity-40 disabled:cursor-not-allowed uppercase tracking-wider;
   }
 
   .btn-secondary {
     @apply px-6 py-3 bg-black text-white font-semibold text-sm 
            border border-surface-border hover:border-zinc-500 
-           transition-colors duration-150 uppercase tracking-wider;
+           transition-colors duration-200 uppercase tracking-wider;
   }
 
   .btn-ghost {
     @apply px-4 py-2 text-zinc-400 hover:text-white 
-           hover:bg-surface-hover transition-colors duration-150 text-sm;
+           hover:bg-surface-hover transition-colors duration-200 text-sm;
   }
 
   /* Sidebar link */
   .sidebar-link {
     @apply flex items-center gap-3 px-4 py-3 text-zinc-400 
            hover:text-white hover:bg-surface-hover transition-colors 
-           duration-150 font-medium text-xs uppercase tracking-wider w-full border-l-2 border-transparent;
+           duration-200 font-medium text-xs uppercase tracking-wider w-full border-l-2 border-transparent;
   }
 
   .sidebar-link.active {
