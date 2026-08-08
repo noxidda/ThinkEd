@@ -10,11 +10,18 @@ export default {
         'sans': ['DM Sans', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
+        palette: {
+          1: '#CDB4DB',
+          2: '#FFC8DD',
+          3: '#FFAFCC',
+          4: '#BDE0FE',
+          5: '#A2D2FF',
+        },
         surface: {
-          DEFAULT: '#000000',
-          card: '#09090b',
-          border: '#18181b',
-          hover: '#121215',
+          DEFAULT: '#13091B',
+          card: '#1C1027',
+          border: '#2E1C3F',
+          hover: '#261635',
         }
       },
       borderRadius: {
