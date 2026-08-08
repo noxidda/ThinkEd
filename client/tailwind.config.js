@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         'sans': ['DM Sans', 'system-ui', '-apple-system', 'sans-serif'],
+        'mono': ['DM Sans', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
         palette: {

@@ -16,18 +16,18 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="w-64 bg-black border-r border-surface-border flex flex-col h-screen">
+    <aside className="w-64 bg-[#13091B] border-r border-[#2E1C3F] flex flex-col h-screen">
       {/* Logo */}
-      <div className="h-20 flex items-center px-6 border-b border-surface-border">
+      <div className="h-20 flex items-center px-6 border-b border-[#2E1C3F]">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-white text-black font-mono font-bold text-xs flex items-center justify-center">
+          <div className="w-8 h-8 bg-[#CDB4DB] text-[#13091B] font-bold text-xs flex items-center justify-center">
             TE
           </div>
           <div>
-            <h1 className="text-xs font-bold text-white tracking-widest uppercase">
+            <h1 className="text-xs font-bold text-[#FFC8DD] tracking-widest uppercase">
               ThinkEd
             </h1>
-            <p className="text-[10px] font-mono text-zinc-500">SYSTEM ARCHITECTURE</p>
+            <p className="text-[10px] text-[#BDE0FE]/70">SYSTEM ARCHITECTURE</p>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ export default function Sidebar() {
                 to={item.to}
                 className={`sidebar-link ${isActive ? 'active' : ''}`}
               >
-                <span className="text-[10px] font-mono px-1.5 py-0.5 border border-surface-border text-zinc-400">
+                <span className="text-[10px] px-1.5 py-0.5 border border-[#2E1C3F] text-[#BDE0FE]">
                   {item.code}
                 </span>
                 <span>{item.label}</span>
@@ -54,14 +54,14 @@ export default function Sidebar() {
       </nav>
 
       {/* Clerk User Button */}
-      <div className="p-4 border-t border-surface-border flex items-center justify-between">
+      <div className="p-4 border-t border-[#2E1C3F] flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
           <UserButton afterSignOutUrl="/" />
           <div className="min-w-0">
             <p className="text-xs font-semibold text-white truncate">
               {user?.fullName || user?.primaryEmailAddress?.emailAddress}
             </p>
-            <p className="text-[10px] font-mono text-zinc-500 truncate">AUTHENTICATED</p>
+            <p className="text-[10px] text-[#BDE0FE]/60 truncate">AUTHENTICATED</p>
           </div>
         </div>
       </div>

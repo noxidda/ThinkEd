@@ -15,10 +15,15 @@
 @layer base {
   * {
     @apply border-surface-border rounded-none;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif !important;
   }
   
+  html, body, button, input, select, textarea, kbd, code, pre {
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif !important;
+  }
+
   body {
-    @apply bg-[#13091B] text-white font-sans antialiased selection:bg-[#CDB4DB] selection:text-[#13091B];
+    @apply bg-[#13091B] text-white antialiased selection:bg-[#CDB4DB] selection:text-[#13091B];
     font-feature-settings: 'ss01', 'ss02', 'cv01', 'cv02';
   }
 
@@ -51,7 +56,7 @@
   .input {
     @apply w-full bg-[#13091B] border border-[#2E1C3F] px-4 py-3 text-white 
            placeholder-zinc-500 focus:outline-none focus:border-[#CDB4DB] 
-           transition-colors duration-200 font-sans text-sm;
+           transition-colors duration-200 text-sm;
   }
 
   /* Button variants using palette */

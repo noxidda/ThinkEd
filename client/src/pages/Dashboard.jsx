@@ -6,12 +6,12 @@ import api from '../services/api';
 function StatCard({ label, value, code }) {
   return (
     <div className="card space-y-4">
-      <div className="flex items-center justify-between border-b border-surface-border pb-2">
-        <span className="text-[10px] font-mono text-zinc-500">{code}</span>
-        <span className="text-[10px] font-mono text-zinc-400">METRIC</span>
+      <div className="flex items-center justify-between border-b border-[#2E1C3F] pb-2">
+        <span className="text-[10px] text-[#BDE0FE]/70">{code}</span>
+        <span className="text-[10px] text-[#BDE0FE]">METRIC</span>
       </div>
-      <p className="text-3xl font-bold text-white tracking-tight font-sans">{value}</p>
-      <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider">{label}</p>
+      <p className="text-3xl font-bold text-[#FFC8DD] tracking-tight">{value}</p>
+      <p className="text-xs text-[#BDE0FE] uppercase tracking-wider">{label}</p>
     </div>
   );
 }
@@ -20,15 +20,15 @@ function QuickAction({ to, label, description, code }) {
   return (
     <Link
       to={to}
-      className="card hover:border-white transition-colors duration-150 flex flex-col justify-between space-y-4"
+      className="card hover:border-[#CDB4DB] transition-colors duration-150 flex flex-col justify-between space-y-4"
     >
       <div className="flex justify-between items-start">
-        <span className="text-[10px] font-mono text-zinc-500">{code}</span>
-        <span className="text-[10px] font-mono text-white">OPEN &rarr;</span>
+        <span className="text-[10px] text-[#BDE0FE]/70">{code}</span>
+        <span className="text-[10px] text-[#CDB4DB]">OPEN &rarr;</span>
       </div>
       <div>
         <h3 className="text-sm font-semibold text-white uppercase">{label}</h3>
-        <p className="text-xs text-zinc-500 mt-1">{description}</p>
+        <p className="text-xs text-[#BDE0FE]/70 mt-1">{description}</p>
       </div>
     </Link>
   );
@@ -99,11 +99,11 @@ export default function Dashboard() {
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="border-b border-surface-border pb-6">
-        <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
+      <div className="border-b border-[#2E1C3F] pb-6">
+        <span className="text-[10px] text-[#BDE0FE]/70 uppercase tracking-widest">
           STUDENT SYSTEM OVERVIEW
         </span>
-        <h1 className="text-display text-white uppercase mt-1">
+        <h1 className="text-display text-[#FFC8DD] uppercase mt-1">
           {greeting}, {user?.firstName || 'Student'}
         </h1>
       </div>
@@ -117,7 +117,7 @@ export default function Dashboard() {
 
       {/* Quick Actions */}
       <div className="space-y-4">
-        <h2 className="text-subheading text-white uppercase tracking-wider font-mono">
+        <h2 className="text-subheading text-[#FFAFCC] uppercase tracking-wider">
           SYSTEM MODULES
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
