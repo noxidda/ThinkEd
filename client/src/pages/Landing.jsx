@@ -4,7 +4,7 @@ import { SignedIn, SignedOut } from '@clerk/clerk-react';
 export default function Landing() {
   return (
     <div className="min-h-screen bg-[#13091B] text-white selection:bg-[#CDB4DB] selection:text-[#13091B] flex flex-col font-sans antialiased">
-      {/* Navbar */}
+      {/* Enterprise Minimal Navbar */}
       <header className="h-20 border-b border-[#2E1C3F] flex items-center justify-between px-8 md:px-16 bg-[#13091B]/90 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-[#CDB4DB] text-[#13091B] font-bold text-sm flex items-center justify-center tracking-tighter">
@@ -12,12 +12,6 @@ export default function Landing() {
           </div>
           <span className="font-bold tracking-tight text-base uppercase text-[#FFC8DD]">ThinkEd</span>
         </div>
-
-        <nav className="hidden md:flex items-center gap-8 text-xs font-medium uppercase tracking-wider text-[#BDE0FE]">
-          <a href="#features" className="hover:text-[#FFAFCC] transition-colors duration-150">Features</a>
-          <a href="#solutions" className="hover:text-[#FFAFCC] transition-colors duration-150">Solutions</a>
-          <a href="#enterprise" className="hover:text-[#FFAFCC] transition-colors duration-150">Enterprise</a>
-        </nav>
 
         <div className="flex items-center gap-4">
           <SignedOut>
@@ -38,12 +32,12 @@ export default function Landing() {
 
       {/* Hero Section */}
       <section className="flex-1 flex flex-col justify-center items-center text-center px-6 py-28 max-w-5xl mx-auto space-y-8">
-        <h1 className="text-display md:text-7xl font-bold tracking-tight max-w-4xl leading-none text-[#FFC8DD]">
-          THE MINIMALIST AI ASSISTANT FOR SERIOUS LEARNERS.
+        <h1 className="text-display md:text-6xl font-bold tracking-tight max-w-3xl leading-tight text-[#FFC8DD]">
+          Your Personal AI Study Assistant
         </h1>
 
-        <p className="text-[#BDE0FE]/80 max-w-xl text-sm md:text-base leading-relaxed font-normal">
-          Accelerate comprehension with enterprise-grade document intelligence, retrieval-augmented queries, and automated study workflows built for rigorous academic research.
+        <p className="text-[#BDE0FE]/80 max-w-lg text-sm md:text-base leading-relaxed font-normal">
+          Upload your study notes, generate instant flashcards, practice with quizzes, and chat directly with your documents.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
