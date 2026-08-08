@@ -20,8 +20,8 @@ export default function Register() {
 
       {/* Main Container */}
       <main className="flex-1 flex items-center justify-center p-6 my-8">
-        <div className="w-full max-w-md card p-8 space-y-6 border border-surface-border bg-surface-card">
-          <div className="text-center space-y-2">
+        <div className="w-full max-w-md card p-8 border border-surface-border bg-surface-card flex flex-col items-center">
+          <div className="text-center space-y-2 mb-6 w-full">
             <h1 className="text-heading text-white uppercase font-bold tracking-tight">
               Create your account
             </h1>
@@ -30,13 +30,13 @@ export default function Register() {
             </p>
           </div>
 
-          {/* Custom Styled Clerk Component */}
-          <div className="flex justify-center w-full">
+          {/* Embedded Clerk SignUp component without path routing mismatch */}
+          <div className="w-full flex justify-center">
             <SignUp
+              path="/register"
               routing="path"
-              path="/sign-up"
-              signInUrl="/sign-in"
-              afterSignUpUrl="/dashboard"
+              signInUrl="/login"
+              fallbackRedirectUrl="/dashboard"
               appearance={{
                 baseTheme: dark,
                 variables: {
@@ -51,17 +51,18 @@ export default function Register() {
                 },
                 elements: {
                   rootBox: 'w-full',
+                  cardBox: 'w-full shadow-none',
                   card: 'bg-black border border-zinc-800 p-6 shadow-none w-full rounded-none',
                   headerTitle: 'hidden',
                   headerSubtitle: 'hidden',
                   socialButtonsBlockButton:
-                    'bg-black border border-zinc-800 text-white hover:bg-zinc-900 transition-colors text-xs font-semibold rounded-none py-2.5',
+                    'bg-black border border-zinc-800 text-white hover:bg-zinc-900 transition-colors text-xs font-semibold rounded-none py-2.5 w-full justify-center',
                   socialButtonsBlockButtonText: 'text-white font-medium text-xs',
                   dividerLine: 'bg-zinc-800',
                   dividerText: 'text-zinc-500 text-[10px] uppercase font-mono',
                   formFieldLabel: 'text-zinc-400 font-medium text-xs uppercase tracking-wider',
                   formFieldInput:
-                    'bg-black border border-zinc-800 text-white text-sm focus:border-white transition-colors rounded-none px-4 py-2.5',
+                    'bg-black border border-zinc-800 text-white text-sm focus:border-white transition-colors rounded-none px-4 py-2.5 w-full',
                   formButtonPrimary:
                     'bg-white text-black font-semibold text-xs uppercase tracking-wider hover:bg-zinc-200 transition-colors rounded-none py-3 w-full',
                   footerActionLink: 'text-white hover:underline text-xs',
