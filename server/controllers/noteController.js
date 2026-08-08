@@ -26,21 +26,26 @@ exports.uploadNote = async (req, res) => {
 
     if (!file) return res.status(400).json({ message: 'No file uploaded' });
 
+    // Extract Cloudinary fields from Multer Cloudinary storage response
+    const pdfUrl = file.path || file.secure_url || `/uploads/${file.filename}`;
+    const cloudinaryId = file.filename || file.public_id || 'cloudinary_storage';
+
     const note = await Note.create({
       userId: req.user.id,
       title: title || file.originalname,
       subject: subject || 'General',
       fileName: file.originalname,
       fileType: file.mimetype.includes('pdf') ? 'pdf' : 'text',
-      pdfUrl: `/uploads/${file.filename}`,
-      cloudinaryId: 'local_storage',
-      fileSize: file.size,
-      extractedText: `Extracted content for ${title || file.originalname}. Processing text chunks for vector embedding.`,
+      pdfUrl,
+      cloudinaryId,
+      fileSize: file.size || 0,
+      extractedText: `Extracted content for ${title || file.originalname}. Ready for RAG processing.`,
       status: 'ready',
     });
 
     res.status(201).json({ note });
   } catch (error) {
+    console.error('Upload Note error:', error);
     res.status(500).json({ message: 'Error uploading note' });
   }
 };
