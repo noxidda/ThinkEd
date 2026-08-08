@@ -37,26 +37,41 @@ export default function Landing() {
       </header>
 
       {/* Hero Section */}
-      <section className="flex-1 flex flex-col justify-center items-center text-center px-6 py-28 max-w-5xl mx-auto space-y-10">
+      <section className="flex-1 flex flex-col justify-center items-center text-center px-6 py-28 max-w-5xl mx-auto space-y-8">
         <h1 className="text-display md:text-7xl font-bold tracking-tight max-w-4xl leading-none text-[#FFC8DD]">
           THE MINIMALIST AI ASSISTANT FOR SERIOUS LEARNERS.
         </h1>
 
-        <p className="text-[#BDE0FE] max-w-2xl text-lg md:text-xl leading-relaxed font-normal">
+        <p className="text-[#BDE0FE]/80 max-w-xl text-sm md:text-base leading-relaxed font-normal">
           Accelerate comprehension with enterprise-grade document intelligence, retrieval-augmented queries, and automated study workflows built for rigorous academic research.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+        <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
           <SignedOut>
-            <Link to="/register" className="btn-primary px-9 py-4 text-base tracking-normal">
+            <Link to="/register" className="btn-primary px-8 py-3.5 text-sm tracking-normal">
               Start Learning
             </Link>
           </SignedOut>
           <SignedIn>
-            <Link to="/dashboard" className="btn-primary px-9 py-4 text-base tracking-normal">
+            <Link to="/dashboard" className="btn-primary px-8 py-3.5 text-sm tracking-normal">
               Open Dashboard
             </Link>
           </SignedIn>
+
+          {/* Download Windows Button */}
+          <a
+            href="#download-windows"
+            className="btn-secondary px-8 py-3.5 text-sm tracking-normal flex items-center justify-center gap-2.5 bg-[#1C1027] border border-[#A2D2FF]/40 text-[#A2D2FF] hover:bg-[#261635] hover:border-[#A2D2FF] transition-all duration-200"
+          >
+            <svg
+              className="w-4 h-4 fill-current text-[#A2D2FF]"
+              viewBox="0 0 88 88"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0 12.402l35.687-4.86.016 34.423-35.67.203zm35.67 33.527l.028 34.453L0 75.48V46.102zM39.77 6.94L87.31 0v41.522l-47.54.407zm47.54 39.117V88L39.77 81.28V46.425z" />
+            </svg>
+            <span>Download for Windows</span>
+          </a>
         </div>
       </section>
 
