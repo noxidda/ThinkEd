@@ -1,4 +1,5 @@
 import { SignUp } from '@clerk/clerk-react';
+import { dark } from '@clerk/themes';
 import { Link } from 'react-router-dom';
 
 export default function Register() {
@@ -30,26 +31,37 @@ export default function Register() {
           </div>
 
           {/* Custom Styled Clerk Component */}
-          <div className="flex justify-center clerk-custom-wrapper">
+          <div className="flex justify-center w-full">
             <SignUp
               routing="path"
               path="/sign-up"
               signInUrl="/sign-in"
               afterSignUpUrl="/dashboard"
               appearance={{
+                baseTheme: dark,
+                variables: {
+                  colorPrimary: '#ffffff',
+                  colorBackground: '#000000',
+                  colorText: '#ffffff',
+                  colorTextSecondary: '#a1a1aa',
+                  colorInputBackground: '#000000',
+                  colorInputText: '#ffffff',
+                  borderRadius: '0px',
+                  fontFamily: 'DM Sans, sans-serif',
+                },
                 elements: {
                   rootBox: 'w-full',
-                  card: 'bg-black border border-surface-border p-0 shadow-none w-full',
+                  card: 'bg-black border border-zinc-800 p-6 shadow-none w-full rounded-none',
                   headerTitle: 'hidden',
                   headerSubtitle: 'hidden',
                   socialButtonsBlockButton:
-                    'bg-black border border-surface-border text-white hover:bg-zinc-900 transition-colors text-xs font-semibold rounded-none py-2.5',
+                    'bg-black border border-zinc-800 text-white hover:bg-zinc-900 transition-colors text-xs font-semibold rounded-none py-2.5',
                   socialButtonsBlockButtonText: 'text-white font-medium text-xs',
                   dividerLine: 'bg-zinc-800',
-                  dividerText: 'text-zinc-500 font-mono text-[10px] uppercase',
+                  dividerText: 'text-zinc-500 text-[10px] uppercase font-mono',
                   formFieldLabel: 'text-zinc-400 font-medium text-xs uppercase tracking-wider',
                   formFieldInput:
-                    'bg-black border border-surface-border text-white text-sm focus:border-white transition-colors rounded-none px-4 py-2.5',
+                    'bg-black border border-zinc-800 text-white text-sm focus:border-white transition-colors rounded-none px-4 py-2.5',
                   formButtonPrimary:
                     'bg-white text-black font-semibold text-xs uppercase tracking-wider hover:bg-zinc-200 transition-colors rounded-none py-3 w-full',
                   footerActionLink: 'text-white hover:underline text-xs',
