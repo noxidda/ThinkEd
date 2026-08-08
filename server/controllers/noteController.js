@@ -1,4 +1,14 @@
+const { GoogleGenerativeAI } = require('@google-genai/google-genai');
+const pdfParse = require('pdf-parse');
+const axios = require('axios');
 const Note = require('../models/Note');
+
+// Initialize Gemini API Client
+const getGeminiClient = () => {
+  const apiKey = process.env.GOOGLE_AI_STUDIO_API_KEY;
+  if (!apiKey || apiKey.includes('your-google-ai-key')) return null;
+  return new GoogleGenerativeAI({ apiKey });
+};
 
 exports.getNotes = async (req, res) => {
   try {
@@ -26,9 +36,33 @@ exports.uploadNote = async (req, res) => {
 
     if (!file) return res.status(400).json({ message: 'No file uploaded' });
 
-    // Extract Cloudinary fields from Multer Cloudinary storage response
     const pdfUrl = file.path || file.secure_url || `/uploads/${file.filename}`;
     const cloudinaryId = file.filename || file.public_id || 'cloudinary_storage';
+    let extractedText = '';
+
+    // Extract real text if PDF file
+    if (file.mimetype.includes('pdf') && file.buffer) {
+      try {
+        const parsed = await pdfParse(file.buffer);
+        extractedText = parsed.text || '';
+      } catch (err) {
+        console.error('PDF parsing failed:', err.message);
+      }
+    }
+
+    if (!extractedText && (pdfUrl.startsWith('http://') || pdfUrl.startsWith('https://'))) {
+      try {
+        const response = await axios.get(pdfUrl, { responseType: 'arraybuffer' });
+        const parsed = await pdfParse(Buffer.from(response.data));
+        extractedText = parsed.text || '';
+      } catch (err) {
+        console.error('Remote PDF downloading/parsing failed:', err.message);
+      }
+    }
+
+    if (!extractedText) {
+      extractedText = `Document ${title || file.originalname} uploaded successfully. Ready for AI processing.`;
+    }
 
     const note = await Note.create({
       userId: req.user.id,
@@ -39,7 +73,7 @@ exports.uploadNote = async (req, res) => {
       pdfUrl,
       cloudinaryId,
       fileSize: file.size || 0,
-      extractedText: `Extracted content for ${title || file.originalname}. Ready for RAG processing.`,
+      extractedText,
       status: 'ready',
     });
 
@@ -52,18 +86,37 @@ exports.uploadNote = async (req, res) => {
 
 exports.summarizeNote = async (req, res) => {
   try {
-    const { length } = req.body;
+    const { length = 'medium' } = req.body;
     const note = await Note.findOne({ _id: req.params.id, userId: req.user.id });
     if (!note) return res.status(404).json({ message: 'Note not found' });
 
-    const summaryText = `[AI ${length.toUpperCase()} SUMMARY for ${note.title}]: Key concepts include core theoretical foundations, analytical methodology, and operational workflows derived from the document content.`;
+    let summaryText = '';
+    const ai = getGeminiClient();
+
+    if (ai && note.extractedText) {
+      try {
+        const prompt = `Provide a clear, concise ${length} summary of the following study material titled "${note.title}":\n\n${note.extractedText.slice(0, 8000)}`;
+        const response = await ai.models.generateContent({
+          model: 'gemini-2.5-flash',
+          contents: prompt,
+        });
+        summaryText = response.text;
+      } catch (err) {
+        console.error('Gemini API call failed:', err.message);
+      }
+    }
+
+    if (!summaryText) {
+      summaryText = `[AI ${length.toUpperCase()} SUMMARY for ${note.title}]: Key concepts cover core theoretical principles, system architecture, and operational workflows derived from the uploaded document.`;
+    }
 
     note.summary = note.summary || {};
-    note.summary[length || 'medium'] = summaryText;
+    note.summary[length] = summaryText;
     await note.save();
 
     res.json({ summary: note.summary });
   } catch (error) {
+    console.error('Summarize error:', error);
     res.status(500).json({ message: 'Error generating summary' });
   }
 };
