@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-surface-border rounded-none;
+  }
+  
+  body {
+    @apply bg-black text-white font-sans antialiased selection:bg-white selection:text-black;
+    font-feature-settings: 'ss01', 'ss02', 'cv01', 'cv02';
+  }
+
+  /* Custom minimal scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-800 rounded-none;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-600;
+  }
+}
+
+@layer components {
+  /* Minimal card component */
+  .card {
+    @apply bg-surface-card border border-surface-border p-6 transition-colors duration-150;
+  }
+
+  /* Input component */
+  .input {
+    @apply w-full bg-black border border-surface-border px-4 py-3 text-white 
+           placeholder-zinc-600 focus:outline-none focus:border-white 
+           transition-colors duration-150 font-sans text-sm;
+  }
+
+  /* Button variants - high contrast monochrome */
+  .btn-primary {
+    @apply px-6 py-3 bg-white text-black font-semibold text-sm 
+           hover:bg-zinc-200 transition-colors duration-150 
+           border border-white disabled:opacity-40 disabled:cursor-not-allowed uppercase tracking-wider;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-black text-white font-semibold text-sm 
+           border border-surface-border hover:border-zinc-500 
+           transition-colors duration-150 uppercase tracking-wider;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-zinc-400 hover:text-white 
+           hover:bg-surface-hover transition-colors duration-150 text-sm;
+  }
+
+  /* Sidebar link */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 text-zinc-400 
+           hover:text-white hover:bg-surface-hover transition-colors 
+           duration-150 font-medium text-xs uppercase tracking-wider w-full border-l-2 border-transparent;
+  }
+
+  .sidebar-link.active {
+    @apply text-white bg-surface-hover border-l-2 border-white;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
