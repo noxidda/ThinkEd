@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/clerk-react';
+import { SignedIn, SignedOut } from '@clerk/clerk-react';
 
 export default function Landing() {
   return (
@@ -21,12 +21,12 @@ export default function Landing() {
 
         <div className="flex items-center gap-4">
           <SignedOut>
-            <SignInButton mode="modal">
-              <button className="btn-ghost font-medium text-xs">Sign In</button>
-            </SignInButton>
-            <SignUpButton mode="modal">
-              <button className="btn-primary px-5 py-2.5">Get Started</button>
-            </SignUpButton>
+            <Link to="/login" className="btn-ghost font-medium text-xs">
+              Sign In
+            </Link>
+            <Link to="/register" className="btn-primary px-5 py-2.5">
+              Get Started
+            </Link>
           </SignedOut>
           <SignedIn>
             <Link to="/dashboard" className="btn-primary px-5 py-2.5">
@@ -48,11 +48,9 @@ export default function Landing() {
 
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
           <SignedOut>
-            <SignUpButton mode="modal">
-              <button className="btn-primary px-9 py-4 text-base tracking-normal">
-                Start Learning
-              </button>
-            </SignUpButton>
+            <Link to="/register" className="btn-primary px-9 py-4 text-base tracking-normal">
+              Start Learning
+            </Link>
           </SignedOut>
           <SignedIn>
             <Link to="/dashboard" className="btn-primary px-9 py-4 text-base tracking-normal">
