@@ -89,12 +89,14 @@ mongoose
   .connect(MONGODB_URI)
   .then(() => {
     console.log('[Database] Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`[Server] Server running on port ${PORT}`);
-    });
   })
   .catch((err) => {
-    console.error('[Error] MongoDB connection error:', err);
+    console.error('[Database Error] MongoDB connection error:', err.message);
+    console.log('[Database Notice] Please whitelist 0.0.0.0/0 (or your current IP) in MongoDB Atlas -> Network Access.');
   });
+
+app.listen(PORT, () => {
+  console.log(`[Server] Server running on port ${PORT}`);
+});
 
 module.exports = app;
